@@ -1,7 +1,7 @@
 export default function NavBarComponent(props) {
   return (
-    <div className="flex  py-2 px-12 justify-between">
-      <div className="lg:text-xl text-md italic text-gray-800 text-opacity-90 place-items-start font-medium ">
+    <div className="flex items-center py-2 px-12 justify-between">
+      <div className="lg:text-xl text-md italic text-gray-700 place-items-start font-medium ">
         Seek
       </div>
 
