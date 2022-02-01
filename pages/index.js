@@ -116,7 +116,7 @@ export default function Home() {
         <NavBarComponent coder={query.coder} />
       </header>
 
-      <main className="px-2 mt-4">
+      <main className="px-2 mt-4 h-screen">
         <div className="grid grid-cols-1 place-items-center">
           <section
             id="desc"
