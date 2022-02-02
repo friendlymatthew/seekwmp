@@ -89,8 +89,7 @@ export default function Home() {
           setSuccess(true);
         })
         .catch((error) => {
-          console.log("Error: ", error);
-          setErrorCode(error.response);
+          console.log("Error")
           setError(true);
         });
     }
@@ -116,7 +115,7 @@ export default function Home() {
         <NavBarComponent coder={query.coder} />
       </header>
 
-      <main className="px-2 mt-4 h-screen">
+      <main className="px-2 mt-4 pb-12">
         <div className="grid grid-cols-1 place-items-center">
           <section
             id="desc"
@@ -346,8 +345,12 @@ export default function Home() {
                         d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
                       ></path>
                     </svg>
-                    <label>Error code: {errorCode} </label>
+                    <label>Error message: {errorCode} </label>
                   </div>
+
+                  <a href="" target="_blank" rel="noreferrer" className="text-md text-gray-700 text-opacity-100 lg:hover:text-opacity-80 lg:hover:underline lg:ease-in lg:duration-100 lg:transition">
+                    Report Issue
+                  </a>
                 </div>
               ) : null}
             </div>
