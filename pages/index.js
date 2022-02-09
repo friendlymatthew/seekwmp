@@ -283,7 +283,9 @@ export default function Home() {
               </ul>
 
               {startFlag && stopFlag ? (
-                <div className="flex justify-end">
+                <div className="flex space-x-4 items-center justify-end">
+                 
+                
                   <button
                     onClick={handleSubmit}
                     className="my-4 bg-orange-400 hover:bg-orange-300 px-2 py-1 rounded-sm flex items-center space-x-2"
@@ -304,6 +306,15 @@ export default function Home() {
                       />
                     </svg>
                   </button>
+
+                  <a href="/" target="_blank" rel="noreferrer">
+                  <div className="text-sm opacity-80 italic font-medium hover:underline transition ease-in duration-300">
+                    Report Issue
+                  </div>
+                  </a>
+
+                 
+                 
                 </div>
               ) : (
                 <div className="pb-4"></div>
