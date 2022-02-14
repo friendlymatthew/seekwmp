@@ -1,4 +1,4 @@
-# _WELCOME TO AD SALON_
+# _WELCOME TO SEEK_
 
 #### Written by Matthew Kim
 
