@@ -35,7 +35,6 @@ export default function Home() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const [errorCode, setErrorCode] = useState();
 
   useEffect(() => {
     //packaging url params into postData state
@@ -124,6 +123,7 @@ export default function Home() {
             <ReactPlayer
               url={videourl}
               ref={reference}
+              playing
               controls
               width={450}
               height={360}
