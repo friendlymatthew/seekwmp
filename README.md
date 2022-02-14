@@ -176,114 +176,12 @@ fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
 
 <br />
 
-### Video Information
 
-#### Video description component
+### Extracting data from Server to CSV
+We will be using the [`mongoexport`](https://docs.mongodb.com/database-tools/mongoexport/) to package the clipping times into a .csv file.
 
-#### Variables Used
+Enter the following command into your terminal:
 
-| Variable          |
-| ----------------- |
-| `{query.title}`   |
-| `{query.station}` |
-| `{query.market}`  |
-| `{query.id}`      |
-| `{query.snippet}` |
+mongoexport –db database_name –collection collection_name –type=csv –fields fields_names –out path_or_name_of_the_file
 
-```html
-    <div>
-        <Typography
-            variant="h6"
-            style={{ color: "#FFFFFF", fontWeight: 600 }}
-        >
-            From {query.title}, {query.station}, {query.market}
-        </Typography>
-        <Typography style={{ color: "#FFFFFF" }}>
-            video_id: {query.id}
-        </Typography>
-        <Paper
-            style={{ marginTop: "15px", backgroundColor: "#252526", padding: "15px"}}
-            elevation={3}
-        >
-            <Typography
-            variant="h6"
-            style={{ color: "#FFFFFF" }}
-            >
-            {query.snippet}
-            </Typography>
-        </Paper>
-    </div>
-```
-
-<br />
-
-### Coder Toolbar
-
-#### Toolbar for coder actions involving seeking and marking times
-
-#### Methods Used
-
-| Method          |
-| --------------- |
-| `handleSeek()`  |
-| `handleStart()` |
-| `handleStop()`  |
-
-```html
-    <div
-        style={{
-            padding: "10px",
-            justifyContent: "space-between",
-            maxWidth: "500px",
-            display: "flex",
-            marginTop: "10px",
-        }}
-        >
-        <span>
-            <Button
-            style={{ backgroundColor: "#04dbfb" }}
-            onClick={handleSeek}
-            >
-            <VisibilityIcon style={{ marginRight: "8px" }} />
-            <Typography
-                variant="h5"
-                style={{ fontWeight: 600, color: "#000000" }}
-            >
-                Seek
-            </Typography>
-            </Button>
-        </span>
-
-        <span>
-            <Button
-            style={{ backgroundColor: "#ee76da" }}
-            onClick={handleStart}
-            >
-            <PlayArrowIcon style={{ marginRight: "8px" }} />
-            <Typography
-                variant="h5"
-                style={{ fontWeight: 600, color: "#000000" }}
-            >
-                Mark Start
-            </Typography>
-            </Button>
-        </span>
-
-        <span>
-            <Button
-            style={{ backgroundColor: "#b88dfd" }}
-            onClick={handleStop}
-            >
-            <StopIcon style={{ marginRight: "8px" }} />
-            <Typography
-                variant="h5"
-                style={{ fontWeight: 600, color: "#000000" }}
-            >
-                Mark Stop
-            </Typography>
-            </Button>
-        </span>
-    </div>
-```
-
-<br />
+mongoexport -db myFirstDatabase -collection clips -type=csv
