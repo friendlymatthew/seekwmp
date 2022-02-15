@@ -185,8 +185,18 @@ fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
 ### Extracting data from Server to CSV
 We will be using the [`mongoexport`](https://docs.mongodb.com/database-tools/mongoexport/) to package the clipping times into a .csv file.
 
-Enter the following command into your terminal:
+#### Download the MongoDB Shell
+Follow the instructions detailed within the ['mongoDB-shell-manual`](https://docs.mongodb.com/v4.4/mongo/)
 
-mongoexport –db database_name –collection collection_name –type=csv –fields fields_names –out path_or_name_of_the_file
+#### Use MongoExport
+You can double check that you have the mongoexport installed correctly by typing into your terminal:
 
-mongoexport -db myFirstDatabase -collection clips -type=csv
+  mongoexport
+
+Cd into the desired path and paste the following into terminal:
+
+```
+mongoexport --uri="mongodb+srv://mostvaluableship:friendship@clippingcluster.ydncy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" --collection=clips --out=clips.csv
+```
+
+Observe that there is a file called [`clips.csv`] located within the specified path.
