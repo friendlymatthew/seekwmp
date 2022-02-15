@@ -16,16 +16,21 @@ For an extensive user guide, please check out the following document:
 
 - [User Guide](https://docs.google.com/document/d/1N5uHkGX4boBQyj82vzMRa_v3SJmHPs_KBj1AEabEao0/edit?usp=sharing)
 
+# Tech Stack
+* React.js
+* Next.js
+* TailwindCSS
+* Node.js
+* Express.js
+* MongoDB
+* Postman
+
+# Getting Started
+Clone the project from Github
+
+Install dependencies using `npm install`
+
 # Documentation
-
-### Packages
-
-| Package                                                      | NPM                                                                                      |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| [`material-ui`](https://mui.com)                             | ![NPM](https://img.shields.io/npm/l/@material-ui/core?label=material-ui%2Fcore&logo=NPM) |
-| [`axios`](https://axios-http.com)                            | ![NPM](https://img.shields.io/npm/l/axios?label=axios&logo=NPM)                          |
-| [`mongoose`](https://www.npmjs.com/package/mongoose)         | ![NPM](https://img.shields.io/npm/l/mongoose?label=mongoose&logo=NPM)                    |
-| [`react-player`](https://www.npmjs.com/package/react-player) | ![NPM](https://img.shields.io/npm/l/react-player?label=react-player&logo=NPM)            |
 
 ### Variables
 
