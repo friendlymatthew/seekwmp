@@ -14,6 +14,7 @@ export default function Home() {
   let snippet = query.snippet;
   let coder = query.coder;
   let seek = query.seek;
+  let id = String(query.id);
 
   const reference = useRef();
 
@@ -35,6 +36,8 @@ export default function Home() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+
+  const [pressSubmit, setPressSubmit] = useState(false);
 
   useEffect(() => {
     //packaging url params into postData state
@@ -63,6 +66,7 @@ export default function Home() {
 
   const handleSubmit = () => {
     if (!success) {
+      setPressSubmit(!pressSubmit);
       const postData = {
         market: market,
         station: station,
@@ -73,6 +77,7 @@ export default function Home() {
         seek: seek,
         start: Number(startSec),
         stop: Number(stopSec),
+        id: id,
       };
 
       fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
@@ -83,14 +88,13 @@ export default function Home() {
         body: JSON.stringify(postData),
       })
         .then((response) => response.json())
-        .then((data) => {
+        .then(data => {
           console.log("Success: ", data);
           setSuccess(true);
-        })
-        .catch((error) => {
-          console.log("Error")
+        }).catch((error) => {
+          console.log("Error: ", error);
           setError(true);
-        });
+        })
     }
   };
 
@@ -114,7 +118,7 @@ export default function Home() {
         <NavBarComponent coder={query.coder} />
       </header>
 
-      <main className="px-2 mt-4 pb-12">
+      <main className="px-2 mt-4 pb-12 min-h-screen">
         <div className="grid grid-cols-1 place-items-center">
           <section
             id="desc"
@@ -133,6 +137,7 @@ export default function Home() {
                 <li className="text-black text-opacity-100 text-xl">
                   Video Title: {query.title}
                 </li>
+                <li>Video Id: {query.id}</li>
                 <li>Market: {query.market}</li>
                 <li>Station: {query.station}</li>
                 <li className="w-11/12 lg:max-w-4xl mt-6 text-lg text-opacity-100 font-medium text-black">
@@ -227,15 +232,18 @@ export default function Home() {
 
           <section className="w-11/12 lg:max-w-4xl">
             <div className="bg-gray-100 rounded-b-md py-8 px-6">
-              <div className="text-2xl font-semibold mb-2">
-                Submission Details:
+              <div className="text-2xl font-semibold">
+                Submission Details
+              </div>
+              <div className="text-md opacity-80 italic mb-2">
+                Press below to seek to specified time
               </div>
 
               <ul>
                 <li>
                   <button
                     onClick={handleSeekStart}
-                    className="flex space-x-2 items-center group text-black lg:hover:text-blue-500 transition ease-in duration-100"
+                    className="flex space-x-2 items-center group text-black hover:text-blue-600 hover:font-medium hover:scale-105 transition ease-in duration-300"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -256,7 +264,7 @@ export default function Home() {
                 </li>
 
                 <li onClick={handleSeekStop}>
-                  <button className="flex space-x-2 items-center group text-black lg:hover:text-blue-500 transition ease-in duration-100">
+                  <button className="flex space-x-2 items-center group text-black hover:text-blue-600 hover:font-medium hover:scale-105 transition ease-in duration-300">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="ml-2 h-5 w-5"
@@ -284,37 +292,55 @@ export default function Home() {
 
               {startFlag && stopFlag ? (
                 <div className="flex space-x-4 items-center justify-end">
-                 
-                
-                  <button
-                    onClick={handleSubmit}
-                    className="my-4 bg-orange-400 hover:bg-orange-300 px-2 py-1 rounded-sm flex items-center space-x-2"
-                  >
-                    <div className="font-bold">Post</div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                  {pressSubmit ? (
+                    <button className="my-4 bg-green-400 hover:bg-green-300 px-2 py-1 rounded-sm flex items-center space-x-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleSubmit}
+                      className="my-4 bg-orange-400 hover:bg-orange-300 px-2 py-1 rounded-sm flex items-center space-x-2"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </button>
+                      <div className="font-bold">Post</div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </button>
+                  )}
 
-                  <a href="/" target="_blank" rel="noreferrer">
-                  <div className="text-sm opacity-80 italic font-medium hover:underline transition ease-in duration-300">
-                    Report Issue
-                  </div>
+                  <a
+                    href="https://forms.gle/adhB5GFFUGn1FT46A"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className="text-sm opacity-80 italic font-medium hover:underline transition ease-in duration-300">
+                      Report Issue
+                    </div>
                   </a>
-
-                 
-                 
                 </div>
               ) : (
                 <div className="pb-4"></div>
@@ -359,7 +385,12 @@ export default function Home() {
                     <label>Error message: {errorCode} </label>
                   </div>
 
-                  <a href="" target="_blank" rel="noreferrer" className="text-md text-gray-700 text-opacity-100 lg:hover:text-opacity-80 lg:hover:underline lg:ease-in lg:duration-100 lg:transition">
+                  <a
+                    href="https://forms.gle/adhB5GFFUGn1FT46A"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-md text-gray-700 text-opacity-100 lg:hover:text-opacity-80 lg:hover:underline lg:ease-in lg:duration-100 lg:transition"
+                  >
                     Report Issue
                   </a>
                 </div>
@@ -371,7 +402,11 @@ export default function Home() {
 
       <footer>
         <div className="items-center flex bg-gray-700 py-4 px-6 mt-20 items-center">
-          <a href="https://github.com/matthewkim0/seekwmp" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/matthewkim0/seekwmp"
+            target="_blank"
+            rel="noreferrer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 text-white"
