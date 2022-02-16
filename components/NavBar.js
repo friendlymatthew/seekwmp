@@ -8,7 +8,6 @@ export default function NavBarComponent(props) {
 
       </span>
 
-
       <div className="lg:text-xl text-md text-white font-medium">{props.coder}</div>
     </div>
   );

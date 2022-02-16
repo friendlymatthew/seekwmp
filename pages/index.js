@@ -81,7 +81,7 @@ export default function Home() {
         id: id,
       };
 
-      fetch("http://localhost:80/api/v1/post", {
+      fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
