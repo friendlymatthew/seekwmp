@@ -36,6 +36,7 @@ export default function Home() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [pressSubmit, setPressSubmit] = useState(false);
 
@@ -80,7 +81,7 @@ export default function Home() {
         id: id,
       };
 
-      fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
+      fetch("http://localhost:80/api/v1/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,13 +89,15 @@ export default function Home() {
         body: JSON.stringify(postData),
       })
         .then((response) => response.json())
-        .then(data => {
+        .then((data) => {
           console.log("Success: ", data);
           setSuccess(true);
-        }).catch((error) => {
-          console.log("Error: ", error);
-          setError(true);
         })
+        .catch((error) => {
+          console.log("Error: ", error);
+          setErrorMessage(error.message);
+          setError(true);
+        });
     }
   };
 
@@ -140,8 +143,8 @@ export default function Home() {
                 <li>Video Id: {query.id}</li>
                 <li>Market: {query.market}</li>
                 <li>Station: {query.station}</li>
-                <li className="w-11/12 lg:max-w-4xl mt-6 text-lg text-opacity-100 font-medium text-black">
-                  <div>Snippet:</div>
+                <li className="w-11/12 lg:max-w-4xl mt-6 text-lg text-opacity-80 font-medium text-black">
+                  <div className="text-opacity-100 text-black">Snippet:</div>
                   {query.snippet}
                 </li>
               </ul>
@@ -232,10 +235,8 @@ export default function Home() {
 
           <section className="w-11/12 lg:max-w-4xl">
             <div className="bg-gray-100 rounded-b-md py-8 px-6">
-              <div className="text-2xl font-semibold">
-                Submission Details
-              </div>
-              <div className="text-md opacity-80 italic mb-2">
+              <div className="text-2xl font-semibold">Submission Details</div>
+              <div className="text-md opacity-80 italic mb-4">
                 Press below to seek to specified time
               </div>
 
@@ -343,7 +344,17 @@ export default function Home() {
                   </a>
                 </div>
               ) : (
-                <div className="pb-4"></div>
+                <div className="flex justify-end">
+                  <a
+                    href="https://forms.gle/adhB5GFFUGn1FT46A"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className="text-sm opacity-80 italic font-medium hover:underline transition ease-in duration-300">
+                      Report Issue
+                    </div>
+                  </a>
+                </div>
               )}
 
               {success ? (
@@ -401,12 +412,12 @@ export default function Home() {
       </main>
 
       <footer>
-        <div className="items-center flex bg-gray-700 py-4 px-6 mt-20 items-center">
-          <a
-            href="https://github.com/matthewkim0/seekwmp"
-            target="_blank"
-            rel="noreferrer"
-          >
+        <a
+          href="https://github.com/matthewkim0/seekwmp"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <div className="group items-center flex space-x-4 bg-gray-700 py-4 px-6 mt-20 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 text-white"
@@ -421,8 +432,12 @@ export default function Home() {
                 d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
               />
             </svg>
-          </a>
-        </div>
+
+            <div className="text-md text-white group-hover:text-opacity-90 transition ease-in duration-200 italic font-medium">
+              Source Code
+            </div>
+          </div>
+        </a>
       </footer>
     </div>
   );
