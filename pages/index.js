@@ -69,13 +69,13 @@ export default function Home() {
     if (!success) {
       setPressSubmit(!pressSubmit);
       const postData = {
-        market: market,
-        station: station,
-        videoSrc: videourl,
-        title: title,
-        snippet: snippet,
-        coder: coder,
-        seek: seek,
+        market: String(market),
+        station: String(station),
+        videoSrc: String(videourl),
+        title: String(title),
+        snippet: String(snippet),
+        coder: String(coder),
+        seek: String(seek),
         start: Number(startSec),
         stop: Number(stopSec),
         id: Number(id),
