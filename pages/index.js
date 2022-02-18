@@ -78,7 +78,7 @@ export default function Home() {
         seek: seek,
         start: Number(startSec),
         stop: Number(stopSec),
-        id: id,
+        id: Number(id),
       };
 
       fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
@@ -393,7 +393,9 @@ export default function Home() {
                         d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
                       ></path>
                     </svg>
-                    <label>Error message: {errorCode} </label>
+                    <div>
+                      Something went wrong
+                    </div>
                   </div>
 
                   <a
