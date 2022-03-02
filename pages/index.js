@@ -78,7 +78,7 @@ export default function Home() {
         seek: String(seek),
         start: Number(startSec),
         stop: Number(stopSec),
-        id: Number(id),
+        id: String(id),
       };
 
       fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
@@ -419,7 +419,7 @@ export default function Home() {
           target="_blank"
           rel="noreferrer"
         >
-          <div className="group items-center flex space-x-4 bg-gray-700 py-4 px-6 mt-20 items-center">
+          <div className="group items-center flex space-x-4 bg-gray-700 py-4 px-6 mt-20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 text-white"
