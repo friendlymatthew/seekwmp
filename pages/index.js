@@ -78,10 +78,10 @@ export default function Home() {
         seek: String(seek),
         start: Number(startSec),
         stop: Number(stopSec),
-        id: String(id),
+        clipId: String(id),
       };
 
-      fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
+      fetch("https://kf1312q9ja.execute-api.us-east-1.amazonaws.com/dev/clip", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
