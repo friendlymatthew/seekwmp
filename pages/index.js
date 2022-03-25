@@ -81,7 +81,7 @@ export default function Home() {
         clipId: String(id),
       };
 
-      fetch("https://kf1312q9ja.execute-api.us-east-1.amazonaws.com/dev/clip", {
+      fetch("https://s7d667xd52.execute-api.us-east-1.amazonaws.com/dev/clip", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
