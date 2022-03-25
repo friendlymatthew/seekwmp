@@ -8,8 +8,12 @@
 [`adsalonwmp`](https://seekwmp.vercel.app/?market=Portland&station=WPFO&title=DailyMailTV&snippet=be+taking+to+make+the+risks+are+worth+their+rewards+medical+staff+housekeeping+and+that+of+se+--+jesse:+jay+jacobs+the+ceo+of+the+timberlake+family+of+camps+is+talking+about+what+it+takes+to+operate+a+summer+camp+in+the+time+of+covid-19+before+the+recently+announced+new+york+ban+jacobs+had+planned+to+open+some+of+his&coder=eraab&url=covid/xWPFO_20200619_1100PM.mp4&id=4&seek=1357) is an internal video annotation web tool that crowdsources data for the [Wesleyan Media Project](https://mediaproject.wesleyan.edu/).
 
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and hosted on a [MongoDB](https://www.mongodb.com/) server.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+In addition to the frontend, there exists a [wmpseekapi](https://github.com/mostvaluableshipfriendship/wmpseekapi).
+
+The API is a DynamoDB API that uses API gateway and AWS Lambda. 
+Details are at the bottom of the page.
 # Usage
 
 For an extensive user guide, please check out the following document:
@@ -22,7 +26,7 @@ For an extensive user guide, please check out the following document:
 * TailwindCSS
 * Node.js
 * Express.js
-* MongoDB
+* Amazon Web Services
 * Postman
 
 # Getting Started
@@ -182,21 +186,22 @@ fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
 <br />
 
 
-### Extracting data from Server to CSV
-We will be using the [`mongoexport`](https://docs.mongodb.com/database-tools/mongoexport/) to package the clipping times into a .csv file.
+# WMPSEEKAPI
+## _AMAZON WEB SERVICES_
+Due to slower POST times with MongoDB and no GUI used to export the collection of clips, we decided to use [DynamoDB](https://aws.amazon.com/dynamodb/). 
 
-#### Download the MongoDB Shell
-Follow the instructions detailed within the ['mongoDB-shell-manual`](https://docs.mongodb.com/v4.4/mongo/)
-
-#### Use MongoExport
-You can double check that you have the mongoexport installed correctly by typing into your terminal:
-
-  mongoexport
-
-Cd into the desired path and paste the following into terminal:
-
+### Services and lifecycle
 ```
-mongoexport --uri="mongodb+srv://mostvaluableship:friendship@clippingcluster.ydncy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" --collection=clips --out=clips.csv
+  FRONTEND
+    |
+  API GATEWAY
+    |
+  Lambda
+    | 
+  DyanmoDB
 ```
 
-Observe that there is a file called [`clips.csv`] located within the specified path.
+Cloudformation, Cloudwatch were also used. 
+Cloudwatch was used to record better server responses for the user.
+
+This was configured using serverless framework.
