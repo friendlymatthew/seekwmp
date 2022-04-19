@@ -1,7 +1,7 @@
 # _WELCOME TO SEEK_
 
 #### Written by Matthew Kim
-![release](https://img.shields.io/badge/release-v.0.0.3-blue)
+![release](https://img.shields.io/badge/release-v.2.0.1-blue)
 
 # About
 
@@ -12,8 +12,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 In addition to the frontend, there exists a [wmpseekapi](https://github.com/mostvaluableshipfriendship/wmpseekapi).
 
-The API is a DynamoDB API that uses API gateway and AWS Lambda. 
-Details are at the bottom of the page.
+# [wmpseekapi](https://github.com/mostvaluableshipfriendship/wmpseekapi)
 # Usage
 
 For an extensive user guide, please check out the following document:
@@ -185,23 +184,3 @@ fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
 
 <br />
 
-
-# WMPSEEKAPI
-## _AMAZON WEB SERVICES_
-Due to slower POST times with MongoDB and no GUI used to export the collection of clips, we decided to use [DynamoDB](https://aws.amazon.com/dynamodb/). 
-
-### Services and lifecycle
-```
-  FRONTEND
-    |
-  API GATEWAY
-    |
-  Lambda
-    | 
-  DyanmoDB
-```
-
-Cloudformation, Cloudwatch were also used. 
-Cloudwatch was used to record better server responses for the user.
-
-This was configured using serverless framework.
