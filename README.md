@@ -1,41 +1,22 @@
-# _WELCOME TO SEEK_
+# **[_SEEKWMP_](https://seekwmp.vercel.app/?market=Portland&station=WPFO&title=DailyMailTV&snippet=be+taking+to+make+the+risks+are+worth+their+rewards+medical+staff+housekeeping+and+that+of+se+--+jesse:+jay+jacobs+the+ceo+of+the+timberlake+family+of+camps+is+talking+about+what+it+takes+to+operate+a+summer+camp+in+the+time+of+covid-19+before+the+recently+announced+new+york+ban+jacobs+had+planned+to+open+some+of+his&coder=eraab&url=covid/xWPFO_20200619_1100PM.mp4&id=4&seek=1357)**
 
-#### Written by Matthew Kim
-![release](https://img.shields.io/badge/release-v.2.0.1-blue)
+#### **About**
 
-# About
+##### An internal web tool to help human coders efficiently mark the region of interest within news outlet video clips. Clip start and stop times are used for training data purposes for the [Wesleyan Media Project](https://mediaproject.wesleyan.edu/)
 
-[`adsalonwmp`](https://seekwmp.vercel.app/?market=Portland&station=WPFO&title=DailyMailTV&snippet=be+taking+to+make+the+risks+are+worth+their+rewards+medical+staff+housekeeping+and+that+of+se+--+jesse:+jay+jacobs+the+ceo+of+the+timberlake+family+of+camps+is+talking+about+what+it+takes+to+operate+a+summer+camp+in+the+time+of+covid-19+before+the+recently+announced+new+york+ban+jacobs+had+planned+to+open+some+of+his&coder=eraab&url=covid/xWPFO_20200619_1100PM.mp4&id=4&seek=1357) is an internal video annotation web tool that crowdsources data for the [Wesleyan Media Project](https://mediaproject.wesleyan.edu/).
+##### This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+<br />
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#### **Getting Started**
 
-In addition to the frontend, there exists a [wmpseekapi](https://github.com/mostvaluableshipfriendship/wmpseekapi).
+##### Clone the project from Github
 
-# [wmpseekapi](https://github.com/mostvaluableshipfriendship/wmpseekapi)
-# Usage
+##### Install dependencies using `npm install`
 
-For an extensive user guide, please check out the following document:
+<br />
 
-- [User Guide](https://docs.google.com/document/d/1N5uHkGX4boBQyj82vzMRa_v3SJmHPs_KBj1AEabEao0/edit?usp=sharing)
-
-# Tech Stack
-* React.js
-* Next.js
-* TailwindCSS
-* Node.js
-* Express.js
-* Amazon Web Services
-* Postman
-
-# Getting Started
-Clone the project from Github
-
-Install dependencies using `npm install`
-
-# Documentation
-
-### Variables
+#### **Documentation**
 
 | Variable    | Description                                                                       |
 | ----------- | --------------------------------------------------------------------------------- |
@@ -105,11 +86,11 @@ We are able to store each value with our `query.KEY` variable.
 | `id`      | {query.id}      | unique video id                                                                                    |
 | `seek`    | {query.seek}    | the suggested start time in seconds of where the snippet is said within the video clip             |
 
-# Sending Data
+#### **Qualtrics**
 
-When a coder submits their video assignment, the contents of the submission is stored as a schema with the following variables:
+##### When a coder submits their video assignment, the contents of the submission is stored as a schema with the following variables:
 
-### Clip Schema
+##### Clip Schema
 
 | Schema Elements | Type   | Variable         | Source         |
 | --------------- | ------ | ---------------- | -------------- |
@@ -123,64 +104,40 @@ When a coder submits their video assignment, the contents of the submission is s
 | `start`         | Number | `startSec` state | user generated |
 | `stop`          | Number | `stopSec` state  | user generated |
 
-### handleSubmit()
+##### handleSubmit()
 
 ```javascript
-const postData = {
-  market: market,
-  station: station,
-  videoSrc: videourl,
-  title: title,
-  snippet: snippet,
-  coder: coder,
-  seek: seek,
-  start: Number(startSec),
-  stop: Number(stopSec),
+const handleSubmit = () => {
+	let fields = {
+		market: String(market),
+		station: String(station),
+		videoSrc: String(videourl),
+		title: String(title),
+		snippet: String(snippet),
+		coder: String(coder),
+		seek: String(seek),
+		start: Number(startSec),
+		stop: Number(stopSec),
+		clipId: String(id),
+	};
+
+	//construct link to qualtrics
+	let link = `https://wesleyan.qualtrics.com/jfe/form/SV_4G6wSx0ngBy6EIe?market=${String(
+		market
+	)}&station=${String(station)}&videoSrc=${String(videourl)}&title=${String(
+		title
+	)}&snippet=${snippet}&coder=${String(coder)}&seek=${String(
+		seek
+	)}&start=${String(startSec)}&stop=${String(stopSec)}&clipId=${String(id)}`;
+
+	console.log(link);
+	setQualLink(link);
 };
-
-fetch("https://seekserverwmp.herokuapp.com/api/v1/post", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(postData),
-})
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Success: ", data);
-    setSuccess(true);
-  })
-  .catch((error) => {
-    console.log("Error");
-    setError(true);
-  });
 ```
 
-# HTML Components
+#### **Qualtrics**
+##### Handle submit constructs a qualtrics link with the data passed in through url params. From there Qualtrics will store the information with their database. I used [this link](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/passing-information-through-query-strings/) to pass information into qualtrics.
 
-### React Player
 
-#### React video player component
 
-#### Props Used
-
-| Prop       | Value                |
-| ---------- | -------------------- |
-| `ref`      | `reference` variable |
-| `url`      | `{query.url}`        |
-| `playing`  | true                 |
-| `controls` | true                 |
-
-```html
-<ReactPlayer
-  url="{videourl}"
-  ref="{reference}"
-  controls
-  playing
-  width="{450}"
-  height="{360}"
-/>
-```
-
-<br />
 
